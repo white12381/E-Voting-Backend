@@ -142,7 +142,7 @@ PASS=your_app_password
 🧑‍💻 Author
 
 Usman Olasunkanmi
-GitHub: @your-username
+GitHub: @ white12381
 📄 License
 
 This project is licensed under the MIT License – free for personal and commercial use.
