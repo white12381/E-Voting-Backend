@@ -10,7 +10,7 @@ export const createDecisionRoom = async (req, res) => {
         const user = await roomModel.createDecision(data)
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        res.status(400).json({ error: error.message?.replace('RoomDecision validation failed:','') });
         console.log(error.message)
     }
 }
@@ -24,8 +24,14 @@ export const getMyRooms = async (req, res) => {
     const user = await userModel.getUser(userId);
     if(!user){
 return    res.status(400).json({ error: "User does not Exist" });
-    }
-    res.status(200).json(rooms);
+    } 
+ 
+       
+const findRoom = await Promise.all(rooms.map(async (dat) => ({
+  ...dat?._doc,
+  totalVotes: (await voteModel.getVoters(dat?._id))?.length,
+})));
+    res.status(200).json(findRoom);
   } catch (error) {
     console.error(error.message);
     res.status(400).json({ error: error.message });
@@ -33,7 +39,7 @@ return    res.status(400).json({ error: "User does not Exist" });
 };
 
 export const getRoomById = async(req, res) => {
-  const roomId = req.params.roomId
+  const roomId = req.params.id
   try{
 const room = await roomModel.getRoomById(roomId);
 if (!room) {

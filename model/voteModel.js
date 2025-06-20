@@ -8,7 +8,7 @@ const votingScheme = new Schema({
         return !v || mongoose.Types.ObjectId.isValid(v);
       },
       message: 'Invalid User ID'
-    }
+    },  
   },
   roomId: {
     type: Schema.Types.ObjectId, 
@@ -27,12 +27,21 @@ const votingScheme = new Schema({
   },
   fullName: {
     type: String,
-    required: [true, "FullName is required"]
+    required: [true, "FullName is required"],
+    validate: {
+      validator: async function(value) {
+        const existingVote = await this.constructor.findOne({ fullName: value });
+        if (existingVote) {
+          return false;
+        }
+        return true;
+      },
+      message: "You already voted",
+    },
     },
       candidateName: {
     type: String,
     required: [true, "FullName is required"],
-    unique: [true, "You already Vote"]
     },
  
 }, { timestamps: true });

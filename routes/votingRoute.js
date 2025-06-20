@@ -138,6 +138,9 @@ votingRoute.use(UserMiddleWare)
  *               title:
  *                 type: string
  *                 example: "Best Developer Award"
+ *               description:
+ *                 type: string
+ *                 example: "Annual tech voting event for best dev"
  *               contestantName:
  *                 type: array
  *                 items:
@@ -161,6 +164,8 @@ votingRoute.use(UserMiddleWare)
  *                   type: string
  *                 title:
  *                   type: string
+ *                 description:
+ *                   type: string
  *                 contestantName:
  *                   type: array
  *                   items:
@@ -177,6 +182,7 @@ votingRoute.use(UserMiddleWare)
  *             example:
  *               _id: "665b1f43f423a933d70aa021"
  *               title: "Best Developer Award"
+ *               description: "Annual tech voting event for best dev"
  *               contestantName: ["Alice", "Bob", "Charlie"]
  *               deadline: "2025-07-01T23:59:59.000Z"
  *               createdAt: "2025-06-20T11:22:33.456Z"
@@ -199,12 +205,12 @@ votingRoute.use(UserMiddleWare)
  *                       example: "Contestants must be between 2 and 5 people"
  *                     deadline:
  *                       type: string
- *                       example: "Deadline is required"
+ *                       example: "Deadline must be a future date"
  *             example:
- *               errors: 
+ *               errors:
  *                 title: "Title is required"
  *                 contestantName: "Contestants must be between 2 and 5 people"
- *                 deadline: "Deadline is required"
+ *                 deadline: "Deadline must be a future date"
  */
 
 votingRoute.post('/create-voting', createDecisionRoom);

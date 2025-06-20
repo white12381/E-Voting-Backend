@@ -15,6 +15,9 @@ const roomSchema = new Schema({
     type: String,
     required: [true, "Title is required"]
   },
+   description: {
+    type: String, 
+  },
   contestantName: {
     type: [String],
     required: [true, "Contestant names are required"],
