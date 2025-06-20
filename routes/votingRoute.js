@@ -107,6 +107,69 @@ const votingRoute = express.Router();
 votingRoute.post('/select-candidate', SelectCandidate);
 
 
+/**
+ * @swagger
+ * /api/voting/room/{roomId}:
+ *   get:
+ *     summary: Get a voting room by ID
+ *     tags:
+ *       - Voting
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         description: The ID of the voting room to retrieve
+ *         schema:
+ *           type: string
+ *           example: 665b1f43f423a933d70aa021
+ *     responses:
+ *       200:
+ *         description: Voting room found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 userId:
+ *                   type: string
+ *                 title:
+ *                   type: string
+ *                 contestantName:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                 deadline:
+ *                   type: string
+ *                   format: date-time
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *             example:
+ *               _id: "665b1f43f423a933d70aa021"
+ *               userId: "665b1bba6e1d3c001faed308"
+ *               title: "Best Developer Award"
+ *               contestantName: ["Alice", "Bob"]
+ *               deadline: "2025-07-01T23:59:59.000Z"
+ *               createdAt: "2025-06-20T11:22:33.456Z"
+ *               updatedAt: "2025-06-20T11:22:33.456Z"
+ *       400:
+ *         description: Room not found or invalid ID
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Room does not exist"
+ */
+votingRoute.get('/room/:id', getRoomById);
+
 votingRoute.use(UserMiddleWare)
 
 /**
@@ -288,68 +351,5 @@ votingRoute.post('/create-voting', createDecisionRoom);
 votingRoute.get('/my-rooms', getMyRooms);
 
 
-
-/**
- * @swagger
- * /api/voting/room/{roomId}:
- *   get:
- *     summary: Get a voting room by ID
- *     tags:
- *       - Voting
- *     parameters:
- *       - in: path
- *         name: roomId
- *         required: true
- *         description: The ID of the voting room to retrieve
- *         schema:
- *           type: string
- *           example: 665b1f43f423a933d70aa021
- *     responses:
- *       200:
- *         description: Voting room found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 _id:
- *                   type: string
- *                 userId:
- *                   type: string
- *                 title:
- *                   type: string
- *                 contestantName:
- *                   type: array
- *                   items:
- *                     type: string
- *                 deadline:
- *                   type: string
- *                   format: date-time
- *                 createdAt:
- *                   type: string
- *                   format: date-time
- *                 updatedAt:
- *                   type: string
- *                   format: date-time
- *             example:
- *               _id: "665b1f43f423a933d70aa021"
- *               userId: "665b1bba6e1d3c001faed308"
- *               title: "Best Developer Award"
- *               contestantName: ["Alice", "Bob"]
- *               deadline: "2025-07-01T23:59:59.000Z"
- *               createdAt: "2025-06-20T11:22:33.456Z"
- *               updatedAt: "2025-06-20T11:22:33.456Z"
- *       400:
- *         description: Room not found or invalid ID
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   example: "Room does not exist"
- */
-votingRoute.get('/room/:id', getRoomById);
 
 export default votingRoute

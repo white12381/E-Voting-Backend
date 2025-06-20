@@ -29,15 +29,18 @@ const votingScheme = new Schema({
     type: String,
     required: [true, "FullName is required"],
     validate: {
-      validator: async function(value) {
-        const existingVote = await this.constructor.findOne({ fullName: value });
-        if (existingVote) {
-          return false;
-        }
-        return true;
-      },
-      message: "You already voted",
-    },
+  validator: async function(value) {
+    const existingVote = await this.constructor.findOne({
+      fullName: value,
+      roomId: this.roomId // assuming roomId is a field in your schema
+    });
+    if (existingVote) {
+      return false;
+    }
+    return true;
+  },
+  message: "You already voted in this room",
+}
     },
       candidateName: {
     type: String,
