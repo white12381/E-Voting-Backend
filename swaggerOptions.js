@@ -1,12 +1,4 @@
 // swaggerOptions.js
-function getServerUrl() {
-  if (typeof window !== 'undefined') {
-    return `${window.location.protocol}://${window.location.host}`;
-  } else {
-    // Return a default URL or throw an error
-    return `http://localhost:${process.env.PORT}`;
-  }
-}
 export const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -31,8 +23,10 @@ export const swaggerOptions = {
     ],
     servers: [
       {
-        url: getServerUrl(),  
-      }, 
+        url: 'http://localhost:4000', 
+        // change if needed
+      },
+      { url: 'https://e-voting-beta-one.vercel.app'}
     ],
   },
   apis: ['./routes/*.js'], // adjust the path to your route files

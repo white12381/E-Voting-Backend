@@ -34,15 +34,36 @@ app.use('/api/user', userRoute)
 app.use('/api/voting', votingRoute);
 
 // app.use('/', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
-app.use("/", swaggerUi.serve, swaggerUi.setup(specs, {
-  explorer: true,
-  customCssUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.css",
-  customJs:
-    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js",
-    
 
-}));
+
+app.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(specs); // or whatever variable holds your swaggerJsdoc result
+});
+
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Swagger UI</title>
+        <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+      </head>
+      <body>
+        <div id="swagger-ui"></div>
+        <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+        <script>
+          window.onload = () => {
+            SwaggerUIBundle({
+              url: '/swagger.json',
+              dom_id: '#swagger-ui',
+            });
+          };
+        </script>
+      </body>
+    </html>
+  `);
+});
 
 
 
