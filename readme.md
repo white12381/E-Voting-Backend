@@ -55,7 +55,7 @@ Start your server and open:
 http://localhost:4000/
 
 🧪 Auth Workflow
-
+    Swagger Page: GET /
     Register: POST /api/user/register
 
     Login: POST /api/user/login → returns JWT
