@@ -4,7 +4,7 @@ function getServerUrl() {
     return `${window.location.protocol}://${window.location.host}`;
   } else {
     // Return a default URL or throw an error
-    return 'http://localhost:2000';
+    return `http://localhost:${process.env.PORT}`;
   }
 }
 export const swaggerOptions = {
@@ -31,10 +31,8 @@ export const swaggerOptions = {
     ],
     servers: [
       {
-        url: getServerUrl(), 
-        // change if needed
-      },
-      // { url: 'https://backend-jfoi8mk40-white12381s-projects.vercel.app'}
+        url: getServerUrl(),  
+      }, 
     ],
   },
   apis: ['./routes/*.js'], // adjust the path to your route files
