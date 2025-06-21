@@ -36,8 +36,8 @@ project-root/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/<project-name>.git
-cd <project-name>
+git clone https://github.com/white12381/E-Voting-Backend.git
+cd E-Voting-Backend.git
 npm install
 
 Create a .env file in the root:
@@ -52,7 +52,7 @@ npm run dev
 
 Start your server and open:
 
-http://localhost:5000/
+http://localhost:4000/
 
 🧪 Auth Workflow
 
@@ -131,7 +131,7 @@ npm start       # Start without nodemon (for production)
 
 🌍 Example .env File
 
-PORT=5000
+PORT=4000
 MONGO_URI=mongodb://localhost:27017/inside-success
 SECRET=your_jwt_secret_key
 USER=your_email@gmail.com
@@ -149,6 +149,7 @@ This project is licensed under the MIT License – free for personal and commerc
 🙋 Need Help?
 
 Open an issue or contact me via GitHub if you need assistance!
+olasunkanmiusman1111@gmail.com
 
 
 
